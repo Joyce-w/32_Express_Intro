@@ -1,3 +1,5 @@
+const ExpressError = require('./expressError')
+
 class MathOps {
         constructor(str) {
                 this.str = str;
@@ -8,7 +10,7 @@ class MathOps {
         }
         getNumArray() {
                 if (this.str == '') {
-                        return 400
+                        throw new ExpressError("not a number",400)
                 }
                 else {
                         // makes array of query numbers, parseInt, sort numerically

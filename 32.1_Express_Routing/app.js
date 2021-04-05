@@ -19,9 +19,6 @@ app.get('/mean', (req, res) => {
         let nums = req.query.nums
         let query = new MathOps(nums)
         query.getNumArray()
-        if (query.getNumArray() === 400) {
-                // use try/catch
-        }
 
         let meanVal = query.getMean()
         return res.send(`{
