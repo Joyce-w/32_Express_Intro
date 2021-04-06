@@ -1,6 +1,5 @@
 const express = require("express");
 const ExpressError = require("../expressError")
-
 // connects to express app 
 const router = new express.Router();
 const items = require("../fakeDB")
@@ -22,7 +21,7 @@ router.post("/", (req, res) => {
 router.get("/:name", (req, res) => {
     let foundItem = items.find(i => i.name === req.params.name)
     if (foundItem === undefined) {
-        res.send(new ExpressError("Cat not found", 404)) 
+        throw new ExpressError("Cat not found", 404)
     }
     res.json(foundItem)
 })
@@ -41,6 +40,5 @@ router.delete("/:name", (req, res) => {
     items.splice(foundIdx, 1)
     res.json({message: "Deleted"})
 })
-
 
 module.exports = router;
