@@ -18,12 +18,16 @@ router.post("/", (req, res) => {
 })
 
 // displays a single item
-router.get("/:name", (req, res) => {
-    let foundItem = items.find(i => i.name === req.params.name)
-    if (foundItem === undefined) {
-        throw new ExpressError("Cat not found", 404)
+router.get("/:name", (req, res, next) => {
+    try {
+        let foundItem = items.find(i => i.name === req.params.name)
+        if (foundItem === undefined) throw new ExpressError("Item not found", 404)
+    
+        res.json(foundItem)        
+    } catch (e) {
+        next(e)
     }
-    res.json(foundItem)
+
 })
 
 // patch an existing item
